@@ -19,7 +19,7 @@ epsilon = 0.1;
 // Cutouts to reduce material and provide airflow
 holes_radius = 7;
 holes_offset = channel_inset + channel_width + cutout_inset + holes_radius;
-holes_spacing = 1;
+holes_spacing = 18;
 
 // Thanks https://gist.github.com/lorennorman/1534990
 module hexagon(radius)
@@ -31,8 +31,9 @@ module hexagon_lattice(rows, cols, row_spacing, col_spacing, height, radius) {
     union() {
         for (row = [0:1:rows]) {
             for(col = [0:1:cols]) {
-                translate([row * (20 + row_spacing), col * (20 + col_spacing), 0]) {
-                    color("blue") linear_extrude(height) hexagon(radius);
+                col_offset = row % 2 == 0 ? radius : 0;
+                translate([row * (row_spacing), col * (col_spacing) + col_offset, 0]) {
+                    linear_extrude(height) hexagon(radius);
                 }
             }
         }
@@ -59,7 +60,7 @@ difference() {
             cube([channel_inset + channel_width + epsilon, channel_inset + channel_width + epsilon, height + 2 * epsilon]);
         }
         translate([holes_offset, holes_offset , -epsilon]) {
-            hexagon_lattice(rows=6, cols=6, height=height + 2 * epsilon, radius=holes_radius, row_spacing=holes_spacing, col_spacing=holes_spacing);
+            hexagon_lattice(rows=7, cols=7, height=height + 2 * epsilon, radius=holes_radius, row_spacing=holes_spacing, col_spacing=holes_spacing);
         }
     };
 };
