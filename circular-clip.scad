@@ -35,7 +35,8 @@ module circular_clip_cut(
         inner_radius = 7.5,
         cut_width=3,
         cut_interval=60,
-        clip_radius=1.25
+        clip_radius=1.25,
+        non_cut_height=5
     ) {
         // Cut out slots to create clips that have flexibility
         difference() {
@@ -50,7 +51,7 @@ module circular_clip_cut(
             union() {
                 for (i = [0:cut_interval:180 - cut_interval]) {
                     rotate([0, 0, i]){
-                        translate([-(outer_radius + clip_radius), 0, base_thickness + epsilon]) {
+                        translate([-(outer_radius + clip_radius), 0, base_thickness + epsilon + non_cut_height]) {
                             cube([(outer_radius + clip_radius) * 2, cut_width, wall_height + epsilon]);
                         }
                     }
@@ -75,7 +76,8 @@ module circular_clip(
         inner_radius = 7.5,
         cut_width=3,
         cut_interval=60,
-        clip_radius=1.25
+        clip_radius=1.25,
+        non_cut_height=5
     ) {
         circular_clip_cut(
             base_radius,
@@ -85,13 +87,9 @@ module circular_clip(
             inner_radius,
             cut_width,
             cut_interval,
-            clip_radius
+            clip_radius,
+            non_cut_height
         );
 }
 
-// Add some smoothing. Note that this operation takes quite some time to compute,
-// so you may want to disable it while developing the model
-minkowski() {
-    circular_clip();
-    sphere(0.5);
-}
+circular_clip(cut_width=2, cut_interval=90, inner_radius=7);
