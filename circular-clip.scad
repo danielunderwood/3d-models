@@ -92,4 +92,4 @@ module circular_clip(
         );
 }
 
-circular_clip(cut_width=2, cut_interval=90, inner_radius=7);
+circular_clip(cut_width=2, cut_interval=90, inner_radius=7, non_cut_height=10);
