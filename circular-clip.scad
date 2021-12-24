@@ -92,4 +92,10 @@ module circular_clip(
         );
 }
 
-circular_clip(cut_width=2, cut_interval=90, inner_radius=7, non_cut_height=10);
+circular_clip(
+    cut_width=2.5,
+    cut_interval=60,
+    inner_radius=6,
+    non_cut_height=10,
+    clip_radius=1.75
+);
