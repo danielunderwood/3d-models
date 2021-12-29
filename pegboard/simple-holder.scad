@@ -15,17 +15,23 @@ plate_y = 10;
 holder_length = 50;
 plate_thickness = 3;
 
+// Offset of plate to make it flush with board
+plate_offset = 2;
+
+// Offset of holder to make sure there's not a hole from the angle
+holder_offset = 1;
+
 // Angle to keep things on the surface
-angle = 10;
+angle = 20;
 
 module holder() {
     union() {
         pin(true);
-        translate([0, 0, -board_thickness + plate_thickness/2])  {
+        translate([0, 0, -board_thickness + plate_thickness/2 + plate_offset])  {
             // Plate to hold against pegboard surface
             cube([plate_x, plate_y, plate_thickness], center=true);
-            translate([-holder_length * sin(angle), 0, -holder_length]) {
-                rotate([0, angle, 0]) cylinder(holder_length, hole_size / 2, hole_size / 2);
+            translate([-holder_length * sin(angle), 0, -holder_length + holder_offset]) {
+                rotate([0, angle, 0]) cylinder(holder_length + holder_offset, hole_size / 2, hole_size / 2);
             }
         }
     }
