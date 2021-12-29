@@ -12,16 +12,20 @@ clip_height = 2*hole_size + 2;
 
 plate_x = 10;
 plate_y = 10;
-holder_length = 40;
+holder_length = 50;
+plate_thickness = 3;
+
+// Angle to keep things on the surface
+angle = 10;
 
 module holder() {
     union() {
         pin(true);
-        translate([0, 0, -board_thickness])  {
+        translate([0, 0, -board_thickness + plate_thickness/2])  {
             // Plate to hold against pegboard surface
-            cube([plate_x, plate_y, 3], center=true);
-            translate([0, 0, -holder_length]) {
-                cylinder(holder_length, hole_size / 2, hole_size / 2);
+            cube([plate_x, plate_y, plate_thickness], center=true);
+            translate([-holder_length * sin(angle), 0, -holder_length]) {
+                rotate([0, angle, 0]) cylinder(holder_length, hole_size / 2, hole_size / 2);
             }
         }
     }
