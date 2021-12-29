@@ -1,14 +1,5 @@
-include <../pegstr/pegstr.scad>
+include <./my-pegboard.scad>
 
-
-// Note that my board seems to be a bit abnormal
-board_thickness = 6;
-hole_spacing = 19.19;
-
-holder_y_count = 1;
-
-// Because we changed hidden parameters, these need to be recalculated
-clip_height = 2*hole_size + 2;
 
 plate_x = 10;
 plate_y = 10;
