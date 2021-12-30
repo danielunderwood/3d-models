@@ -7,7 +7,7 @@ holder_length = 50;
 plate_thickness = 3;
 
 // Offset of plate to make it flush with board
-plate_offset = 2;
+plate_offset = 3;
 
 // Offset of holder to make sure there's not a hole from the angle
 holder_offset = 1;
