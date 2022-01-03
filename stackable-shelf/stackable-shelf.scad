@@ -30,9 +30,5 @@ hole_inset = 5;
 width = inner_width + 2 * (hole_inset + hole_radius);
 depth = inner_depth + 2 * (hole_inset + hole_radius);
 
-// This will give something like a bevel without much work
-minkowski() {
-    shelf(height=depth, width=width, thickness=thickness, hole_radius=hole_radius, hole_depth=hole_depth, hole_inset=hole_inset);
-    sphere(1);
-}
-translate([150, 150, 0]) support(height=height + 2 * hole_depth, hole_radius=hole_radius);
+// shelf(height=depth, width=width, thickness=thickness, hole_radius=hole_radius, hole_depth=hole_depth, hole_inset=hole_inset);
+translate([150, 150, 0]) support(height=height + 2 * hole_depth, hole_radius=hole_radius, tolerance=0.25);
